@@ -21,7 +21,13 @@ sync(store, router) // done.
 
 ### How does it work?
 
-- It adds a `route` module into the store, which contains the state representing the current route.
+- It adds a `route` module into the store, which contains the state representing the current route:
+
+  ``` js
+  store.state.route.path   // current path (string)
+  store.state.route.params // current params (object)
+  store.state.route.query  // current query (object)
+  ```
 
 - When the router navigates to a new route, the store's state is updated.
 
