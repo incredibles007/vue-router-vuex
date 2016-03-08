@@ -6,6 +6,9 @@
 
 ### Usage
 
+``` bash
+npm install vuex-router-sync
+```
 ``` js
 import { sync } from 'vuex-router-sync'
 import store from './vuex/store' // vuex store instance
