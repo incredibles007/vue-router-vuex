@@ -2,7 +2,7 @@
 
 > Effortlessly keep vue-router and vuex store in sync.
 
-**Note:** requires `vuex>0.6.2`.
+**Note:** requires `vuex>=0.6.2`.
 
 ### Usage
 
