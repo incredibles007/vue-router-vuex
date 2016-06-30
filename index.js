@@ -39,9 +39,9 @@ exports.sync = function (store, router) {
 
 function patchStore (store) {
   // add state
-  var set = store._vm.constructor.parsers.path.setPath
+  var set = store._vm.constructor.set
   store._dispatching = true
-  set(store._vm._data, 'route', {
+  set(store.state, 'route', {
     path: '',
     query: null,
     params: null
