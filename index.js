@@ -29,12 +29,7 @@ exports.sync = function (store, router) {
     }
     var to = transition.to
     currentPath = to.path
-    store.dispatch('router/ROUTE_CHANGED', {
-      path: to.path,
-      query: to.query,
-      name: to.name,
-      params: to.params
-    })
+    store.dispatch('router/ROUTE_CHANGED', to)
   })
 }
 
@@ -44,7 +39,6 @@ function patchStore (store) {
   store._dispatching = true
   set(store.state, 'route', {
     path: '',
-    name: '',
     query: null,
     params: null
   })
@@ -55,10 +49,16 @@ function patchStore (store) {
       route: {
         mutations: {
           'router/ROUTE_CHANGED': function (state, to) {
-            state.path = to.path
-            state.name = to.name
-            state.query = to.query
-            state.params = to.params
+            Object.keys(to).forEach(key => {
+              if (key !== 'matched') {
+                set(state, key, to[key])
+              }
+            })
+            Object.keys(state).forEach(key => {
+              if (!(key in to)) {
+                state[key] = null
+              }
+            })
           }
         }
       }
