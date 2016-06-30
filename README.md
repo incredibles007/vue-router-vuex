@@ -31,7 +31,7 @@ sync(store, router) // done.
 
 - When the router navigates to a new route, the store's state is updated.
 
-- **`store.state.route` is immutable, because it is derived state from the URL, which is the source of truth**. You should not attempt to trigger navigations by mutating the route object. Instead, just call `$router.go()`.
+- **`store.state.route` is immutable, because it is derived state from the URL, which is the source of truth**. You should not attempt to trigger navigations by mutating the route object. Instead, just call `$router.go()`. Note that you can do `$router.go({ query: {...}})` to update the query string on the current path.
 
 ### License
 
