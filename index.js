@@ -49,16 +49,7 @@ function patchStore (store) {
       route: {
         mutations: {
           'router/ROUTE_CHANGED': function (state, to) {
-            Object.keys(to).forEach(key => {
-              if (key !== 'matched') {
-                set(state, key, to[key])
-              }
-            })
-            Object.keys(state).forEach(key => {
-              if (!(key in to)) {
-                state[key] = null
-              }
-            })
+            store.state.route = to
           }
         }
       }

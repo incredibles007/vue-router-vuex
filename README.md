@@ -31,7 +31,7 @@ sync(store, router) // done.
 
 - When the router navigates to a new route, the store's state is updated.
 
-- When the store's `route` state is updated, it notifies the router to navigate to the corresponding path. This enables time-traveling between routes in `vue-devtools`.
+- **`store.state.route` is immutable, because it is derived state from the URL, which is the source of truth**. You should not attempt to trigger navigations by mutating the route object. Instead, just call `$router.go()`.
 
 ### License
 
