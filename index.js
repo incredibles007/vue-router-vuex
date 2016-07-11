@@ -52,16 +52,23 @@ function patchStore (store) {
     params: null
   })
   applyMutationState(store, false);
-  // add mutations
-  store.hotUpdate({
-    modules: {
-      route: {
-        mutations: {
-          'router/ROUTE_CHANGED': function (state, to) {
-            store.state.route = to
-          }
-        }
+
+  var routeModule = {
+    mutations: {
+      'router/ROUTE_CHANGED': function (state, to) {
+        store.state.route = to
       }
     }
-  })
+  }
+
+  // add module
+  if (store.module) {
+    store.module('route', routeModule)
+  } else {
+    store.hotUpdate({
+      modules: {
+        route: routeModule
+      }
+    })
+  }
 }
