@@ -5,16 +5,7 @@ exports.sync = function (store, router, options) {
     state: {},
     mutations: {
       'router/ROUTE_CHANGED': function (state, transition) {
-        store.state[moduleName] = Object.freeze({
-          name: transition.to.name,
-          path: transition.to.path,
-          hash: transition.to.hash,
-          query: transition.to.query,
-          params: transition.to.params,
-          fullPath: transition.to.fullPath,
-          meta: transition.to.meta,
-          from: transition.from
-        })
+        store.state[moduleName] = cloneRoute(transition.to, transition.from)
       }
     }
   })
@@ -45,4 +36,20 @@ exports.sync = function (store, router, options) {
     currentPath = to.fullPath
     store.commit('router/ROUTE_CHANGED', { to: to, from: from })
   })
+}
+
+function cloneRoute (to, from) {
+  const clone = {
+    name: to.name,
+    path: to.path,
+    hash: to.hash,
+    query: to.query,
+    params: to.params,
+    fullPath: to.fullPath,
+    meta: to.meta
+  }
+  if (from) {
+    clone.from = cloneRoute(from)
+  }
+  return Object.freeze(clone)
 }
