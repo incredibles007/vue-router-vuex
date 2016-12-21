@@ -39,7 +39,7 @@ exports.sync = function (store, router, options) {
 }
 
 function cloneRoute (to, from) {
-  const clone = {
+  var clone = {
     name: to.name,
     path: to.path,
     hash: to.hash,
