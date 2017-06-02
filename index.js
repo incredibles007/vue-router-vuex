@@ -2,9 +2,10 @@ exports.sync = function (store, router, options) {
   var moduleName = (options || {}).moduleName || 'route'
 
   store.registerModule(moduleName, {
+    namespaced: true,
     state: cloneRoute(router.currentRoute),
     mutations: {
-      'router/ROUTE_CHANGED': function (state, transition) {
+      'ROUTE_CHANGED': function (state, transition) {
         store.state[moduleName] = cloneRoute(transition.to, transition.from)
       }
     }
@@ -37,7 +38,7 @@ exports.sync = function (store, router, options) {
       return
     }
     currentPath = to.fullPath
-    store.commit('router/ROUTE_CHANGED', { to: to, from: from })
+    store.commit(moduleName + '/ROUTE_CHANGED', { to: to, from: from })
   })
 }
 
