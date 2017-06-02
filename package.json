@@ -3,6 +3,10 @@
   "version": "4.2.0",
   "description": "Effortlessly keep vue-router and vuex store in sync.",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "scripts": {
     "test": "jest"
   },
