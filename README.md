@@ -1,6 +1,6 @@
-# vuex-router-sync
+# vuex-router-sync [![CircleCI](https://circleci.com/gh/vuejs/vuex-router-sync.svg?style=svg)](https://circleci.com/gh/vuejs/vuex-router-sync)
 
-> Effortlessly keep vue-router and vuex store in sync.
+> Sync vue-router's current $route as part of vuex store's state.
 
 ### Usage
 
@@ -22,7 +22,7 @@ sync(store, router) // done.
 // bootstrap your app...
 ```
 
-You can set a custom vuex module name
+You can optionally set a custom vuex module name:
 
 ```js
 sync(store, router, { moduleName: 'RouteModule' } )
