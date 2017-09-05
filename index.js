@@ -15,7 +15,7 @@ exports.sync = function (store, router, options) {
   var currentPath
 
   // sync router on store change
-  const storeUnwatch = store.watch(
+  var storeUnwatch = store.watch(
     function (state) { return state[moduleName] },
     function (route) {
       if (route.fullPath === currentPath) {
@@ -32,7 +32,7 @@ exports.sync = function (store, router, options) {
   )
 
   // sync store on router navigation
-  const afterEachUnHook = router.afterEach(function (to, from) {
+  var afterEachUnHook = router.afterEach(function (to, from) {
     if (isTimeTraveling) {
       isTimeTraveling = false
       return
@@ -46,7 +46,7 @@ exports.sync = function (store, router, options) {
     if (afterEachUnHook != null) {
       afterEachUnHook()
     }
-    
+
     // On unsync, remove store watch
     if (storeUnwatch != null) {
       storeUnwatch();
