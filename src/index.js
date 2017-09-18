@@ -1,24 +1,24 @@
 exports.sync = function (store, router, options) {
-  var moduleName = (options || {}).moduleName || 'route'
+  const moduleName = (options || {}).moduleName || 'route'
 
   store.registerModule(moduleName, {
     namespaced: true,
     state: cloneRoute(router.currentRoute),
     mutations: {
-      'ROUTE_CHANGED': function (state, transition) {
+      'ROUTE_CHANGED' (state, transition) {
         store.state[moduleName] = cloneRoute(transition.to, transition.from)
       }
     }
   })
 
-  var isTimeTraveling = false
-  var currentPath
+  let isTimeTraveling = false
+  let currentPath
 
   // sync router on store change
-  var storeUnwatch = store.watch(
-    function (state) { return state[moduleName] },
-    function (route) {
-      var fullPath = route.fullPath
+  const storeUnwatch = store.watch(
+    state => state[moduleName],
+    route => {
+      const { fullPath } = route
       if (fullPath === currentPath) {
         return
       }
@@ -32,13 +32,13 @@ exports.sync = function (store, router, options) {
   )
 
   // sync store on router navigation
-  var afterEachUnHook = router.afterEach(function (to, from) {
+  const afterEachUnHook = router.afterEach((to, from) => {
     if (isTimeTraveling) {
       isTimeTraveling = false
       return
     }
     currentPath = to.fullPath
-    store.commit(moduleName + '/ROUTE_CHANGED', { to: to, from: from })
+    store.commit(moduleName + '/ROUTE_CHANGED', { to, from })
   })
 
   return function unsync () {
@@ -58,7 +58,7 @@ exports.sync = function (store, router, options) {
 }
 
 function cloneRoute (to, from) {
-  var clone = {
+  const clone = {
     name: to.name,
     path: to.path,
     hash: to.hash,
