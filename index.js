@@ -19,7 +19,9 @@ exports.sync = function (store, router, options) {
     function (state) { return state[moduleName] },
     function (route) {
       var fullPath = route.fullPath
-      if (fullPath === currentPath) { return }
+      if (fullPath === currentPath) {
+        return
+      }
       if (currentPath != null) {
         isTimeTraveling = true
         router.push(route)
@@ -39,7 +41,7 @@ exports.sync = function (store, router, options) {
     store.commit(moduleName + '/ROUTE_CHANGED', { to: to, from: from })
   })
 
-  return function unsync() {
+  return function unsync () {
     // On unsync, remove router hook
     if (afterEachUnHook != null) {
       afterEachUnHook()
@@ -47,7 +49,7 @@ exports.sync = function (store, router, options) {
 
     // On unsync, remove store watch
     if (storeUnwatch != null) {
-      storeUnwatch();
+      storeUnwatch()
     }
 
     // On unsync, unregister Module with store
