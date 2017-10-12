@@ -1,6 +1,6 @@
 {
   "name": "vuex-router-sync",
-  "version": "4.3.2",
+  "version": "5.0.0",
   "description": "Effortlessly keep vue-router and vuex store in sync.",
   "main": "index.js",
   "files": [
