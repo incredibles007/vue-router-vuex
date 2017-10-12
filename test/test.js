@@ -32,7 +32,7 @@ const run = (originalModuleName, done) => {
     ]
   })
 
-  const unsync = sync(store, router, {
+  sync(store, router, {
     moduleName: originalModuleName
   })
 
@@ -56,7 +56,7 @@ const run = (originalModuleName, done) => {
 
   Vue.nextTick(() => {
     expect(app.$el.textContent).toBe('/c/d?n=1#hello c d')
-    done(unsync)
+    done()
   })
 }
 
@@ -68,13 +68,13 @@ test('with custom moduleName', done => {
   run('moduleName', done)
 })
 
-test('desync', done => {
+test('unsync', done => {
   const store = new Vuex.Store()
   spyOn(store, "watch").and.callThrough()
-  
+
   const router = new VueRouter()
 
-  const moduleName = 'testDesync'  
+  const moduleName = 'testDesync'
   const unsync = sync(store, router, {
     moduleName: moduleName
   })
@@ -97,6 +97,6 @@ test('desync', done => {
   expect(router.afterHooks.length).toBe(0)
   expect(store._watcherVm).toBeUndefined()
   expect(store.state[moduleName]).toBeUndefined()
-  
+
   done()
 })

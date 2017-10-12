@@ -5,10 +5,12 @@
   "main": "index.js",
   "files": [
     "index.js",
-    "index.d.ts"
+    "types/*.d.ts"
   ],
+  "typings": "types/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest && npm run test:types",
+    "test:types": "tsc -p types/test",
     "build": "buble src/index.js > index.js",
     "pretest": "npm run build",
     "prepublishOnly": "npm run build"
@@ -29,14 +31,15 @@
   },
   "homepage": "https://github.com/vuejs/vuex-router-sync#readme",
   "devDependencies": {
-    "buble": "^0.15.2",
-    "jest": "^20.0.4",
-    "vue": "^2.3.3",
-    "vue-router": "^2.0.0",
-    "vuex": "^2.1.0"
+    "buble": "^0.16.0",
+    "jest": "^21.2.1",
+    "typescript": "^2.5.3",
+    "vue": "github:vuejs/vue#dev",
+    "vue-router": "^3.0.0",
+    "vuex": "^3.0.0"
   },
   "peerDependencies": {
-    "vue-router": "^2.5.0",
-    "vuex": "^2.1.0"
+    "vue-router": "^3.0.0",
+    "vuex": "^3.0.0"
   }
 }

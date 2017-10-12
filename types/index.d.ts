@@ -1,5 +1,5 @@
 import { Store } from 'vuex';
-import VueRouter = require('vue-router');
+import VueRouter from 'vue-router';
 
 interface SyncOptions {
   moduleName: string;
